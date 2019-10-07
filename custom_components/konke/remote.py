@@ -2,7 +2,7 @@
 Support for the Konke Remote Device(K2 with IR/RF module or MiniK Pro).
 
 For more details about this platform, please refer to the documentation
-https://home-assistant.io/components/remote.konke/
+https://home-assistant.io/components/remote.xiaomi_miio/
 """
 import asyncio
 import logging
@@ -17,7 +17,7 @@ from homeassistant.const import (
     ATTR_ENTITY_ID, CONF_COMMAND)
 import homeassistant.helpers.config_validation as cv
 
-REQUIREMENTS = ['pykonkeio>=2.1.8']
+REQUIREMENTS = ['pykonkeio>=2.1.7']
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -111,7 +111,7 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
 
 
 class KonkeRemote(RemoteDevice):
-    """Representation of a Konke Remote device."""
+    """Representation of a Xiaomi Miio Remote device."""
 
     def __init__(self, device, name, remote_type, hidden):
         """Initialize the remote."""
@@ -124,7 +124,7 @@ class KonkeRemote(RemoteDevice):
     @property
     def unique_id(self) -> str:
         """Return an unique ID."""
-        return '%s:%s' % (self._device.uuid, self.type)
+        return '%s:%s' % (self._device.mac, self.type)
 
     @property
     def name(self) -> str:
